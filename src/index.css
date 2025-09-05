@@ -1,42 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* ExamEdge Design System - Premium Learning Platform */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
+    /* Brand Colors - Purple Academic Theme */
+    --primary: 262 83% 58%; /* #6B46C1 - Academic Purple */
+    --primary-foreground: 0 0% 100%; /* White text on purple */
+    --primary-hover: 262 83% 50%; /* Darker purple for hover */
+    --primary-light: 262 83% 95%; /* Very light purple for backgrounds */
+    
+    /* Background System */
+    --background: 210 20% 98%; /* #F8F9FA - Soft grey background */
+    --foreground: 210 11% 15%; /* #212529 - Dark charcoal text */
+    
+    /* Card System */
+    --card: 0 0% 100%; /* Pure white cards */
+    --card-foreground: 210 11% 15%;
+    --card-shadow: 0 4px 6px -1px rgba(107, 70, 193, 0.1);
+    
+    /* Secondary Colors */
+    --secondary: 220 14% 96%; /* Light grey */
+    --secondary-foreground: 220 9% 46%; /* #6B7280 - Medium grey */
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%;
+    
+    /* Accent Colors */
+    --accent: 262 83% 58%;
+    --accent-foreground: 0 0% 100%;
+    
+    /* Success/Error States */
+    --success: 142 76% 36%; /* Green for correct answers */
+    --success-foreground: 0 0% 100%;
+    --error: 0 84% 60%; /* Red for incorrect answers */
+    --error-foreground: 0 0% 100%;
+    --warning: 38 92% 50%; /* Orange for warnings */
+    --warning-foreground: 0 0% 100%;
+    
+    /* Interactive Elements */
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 262 83% 58%;
+    
+    /* Layout */
+    --radius: 0.75rem; /* Slightly more rounded */
+    --sidebar-width: 16rem; /* 256px */
+    
+    /* Gradients */
+    --gradient-purple: linear-gradient(135deg, hsl(262 83% 58%) 0%, hsl(262 83% 50%) 100%);
+    --gradient-light: linear-gradient(135deg, hsl(262 83% 95%) 0%, hsl(220 14% 96%) 100%);
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgba(107, 70, 193, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(107, 70, 193, 0.1), 0 2px 4px -1px rgba(107, 70, 193, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(107, 70, 193, 0.1), 0 4px 6px -2px rgba(107, 70, 193, 0.05);
+    --shadow-xl: 0 20px 25px -5px rgba(107, 70, 193, 0.1), 0 10px 10px -5px rgba(107, 70, 193, 0.04);
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +122,44 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-inter;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+}
+
+@layer components {
+  /* Custom component classes using design system */
+  .exam-card {
+    @apply bg-card rounded-lg p-6 transition-all duration-200 hover:shadow-lg border border-border/50;
+    box-shadow: var(--shadow-md);
+  }
+  
+  .exam-card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+  }
+  
+  .btn-primary {
+    @apply bg-primary text-primary-foreground hover:bg-primary/90 font-medium px-6 py-3 rounded-lg transition-all duration-200;
+  }
+  
+  .btn-secondary {
+    @apply bg-secondary text-secondary-foreground hover:bg-secondary/80 font-medium px-6 py-3 rounded-lg transition-all duration-200 border border-border;
+  }
+  
+  .sidebar-nav-item {
+    @apply flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 text-secondary-foreground hover:bg-primary/10 hover:text-primary;
+  }
+  
+  .sidebar-nav-item.active {
+    @apply bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground;
+  }
+  
+  .gradient-bg {
+    background: var(--gradient-purple);
+  }
+  
+  .gradient-light-bg {
+    background: var(--gradient-light);
   }
 }
