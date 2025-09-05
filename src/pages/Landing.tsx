@@ -106,20 +106,20 @@ export function Landing() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 gradient-light-bg">
+      <section className="py-20 gradient-bg">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
+          <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground mb-6">
             Ready to Start Your Success Journey?
           </h2>
-          <p className="text-xl text-secondary-foreground mb-8">
+          <p className="text-xl text-primary-foreground/80 mb-8">
             Join thousands of successful UPSC aspirants who chose ExamEdge for their preparation.
           </p>
           <Link
             to="/signup"
-            className="btn-primary text-lg px-8 py-4"
+            className="inline-flex items-center gap-2 bg-primary-foreground text-primary px-8 py-4 rounded-lg font-semibold text-lg hover:bg-primary-foreground/90 transition-all transform hover:scale-105"
           >
             Create Free Account
-            <ArrowRight className="w-5 h-5 ml-2" />
+            <ArrowRight className="w-5 h-5" />
           </Link>
         </div>
       </section>
