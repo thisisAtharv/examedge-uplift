@@ -1,35 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Eye, EyeOff, Mail, Lock } from "lucide-react";
-import { useAuth } from "@/hooks/useAuth";
 
 export function Login() {
   const [showPassword, setShowPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: ""
   });
-  const { signIn, user } = useAuth();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (user) {
-      navigate("/dashboard");
-    }
-  }, [user, navigate]);
-
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
-    
-    const { error } = await signIn(formData.email, formData.password);
-    
-    if (!error) {
-      navigate("/dashboard");
-    }
-    
-    setIsLoading(false);
+    // In a real app, you'd validate credentials here
+    navigate('/dashboard');
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -114,8 +98,8 @@ export function Login() {
               </Link>
             </div>
 
-            <button type="submit" className="btn-primary w-full" disabled={isLoading}>
-              {isLoading ? "Signing in..." : "Sign In"}
+            <button type="submit" className="btn-primary w-full">
+              Sign In
             </button>
           </form>
 

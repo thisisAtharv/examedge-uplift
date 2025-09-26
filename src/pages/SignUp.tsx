@@ -1,12 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Eye, EyeOff, User, Mail, Lock, Calendar, MapPin, Phone, BookOpen } from "lucide-react";
-import { useAuth } from "@/hooks/useAuth";
 
 export function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -22,14 +20,7 @@ export function SignUp() {
     agreeToTerms: false
   });
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
-  const { signUp, user } = useAuth();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (user) {
-      navigate("/dashboard");
-    }
-  }, [user, navigate]);
 
   const subjects = ["History", "Geography", "Political Science", "Economics", "Environment", "Science & Technology"];
   const states = ["Delhi", "Maharashtra", "Karnataka", "Tamil Nadu", "Gujarat", "Rajasthan", "Uttar Pradesh", "Other"];
@@ -39,7 +30,7 @@ export function SignUp() {
     return birthYear >= 1975 && birthYear <= 2005;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const newErrors: { [key: string]: string } = {};
 
@@ -60,16 +51,8 @@ export function SignUp() {
     setErrors(newErrors);
 
     if (Object.keys(newErrors).length === 0) {
-      setIsLoading(true);
-      const displayName = `${formData.firstName} ${formData.lastName}`;
-      
-      const { error } = await signUp(formData.email, formData.password, displayName);
-      
-      if (!error) {
-        // User will need to confirm email before being redirected
-      }
-      
-      setIsLoading(false);
+      // Registration successful
+      navigate('/dashboard');
     }
   };
 
@@ -356,8 +339,8 @@ export function SignUp() {
               {errors.agreeToTerms && <p className="text-error text-sm">{errors.agreeToTerms}</p>}
             </div>
 
-            <button type="submit" className="btn-primary w-full" disabled={isLoading}>
-              {isLoading ? "Creating account..." : "Create Account"}
+            <button type="submit" className="btn-primary w-full">
+              Create Account
             </button>
           </form>
 
